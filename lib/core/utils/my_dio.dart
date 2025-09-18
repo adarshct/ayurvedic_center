@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:ayurvedic_center/core/constants/api_paths.dart';
 import 'package:ayurvedic_center/core/utils/auth.dart';
+import 'package:ayurvedic_center/core/widgets/custom_snackbar.dart';
 import 'package:dio/dio.dart';
 
 class MyDio {
@@ -42,11 +43,7 @@ class MyDio {
     } on DioException catch (ex) {
       printFailedDetails(ex: ex);
 
-      // CustomSnackbar.showSnackbar(
-      //   // context: context,
-      //   message: ex.type.name,
-      //   isFailed: true,
-      // );
+      CustomSnackbar.snackbar(message: ex.type.name, isFailed: true);
 
       return ex;
     }
@@ -54,7 +51,6 @@ class MyDio {
 
   Future<dynamic> post({
     required String path,
-    // required BuildContext context,
     dynamic data,
     Map<String, dynamic>? queryParameters,
     bool isFormData = false,
@@ -75,11 +71,7 @@ class MyDio {
       return jsonDecode(resp.data);
     } on DioException catch (ex) {
       printFailedDetails(ex: ex);
-      // CustomSnackbar.showSnackbar(
-      //   // context: AppRouter.context!,
-      //   message: ex.type.name,
-      //   isFailed: true,
-      // );
+      CustomSnackbar.snackbar(message: ex.type.name, isFailed: true);
       return ex;
     }
   }
@@ -87,7 +79,6 @@ class MyDio {
   Future<dynamic> patch({
     required String path,
     required String id,
-    // required BuildContext context,
     dynamic data,
     bool isFormData = false,
   }) async {
@@ -102,11 +93,7 @@ class MyDio {
       return jsonDecode(resp.data);
     } on DioException catch (ex) {
       printFailedDetails(ex: ex);
-      // CustomSnackbar.showSnackbar(
-      //   // context: context,
-      //   message: ex.type.name,
-      //   isFailed: true,
-      // );
+      CustomSnackbar.snackbar(message: ex.type.name, isFailed: true);
       return ex;
     }
   }
@@ -119,37 +106,10 @@ class MyDio {
       return jsonDecode(resp.data);
     } on DioException catch (ex) {
       printFailedDetails(ex: ex);
-      // CustomSnackbar.showSnackbar(
-      //   // context: context,
-      //   message: ex.type.name,
-      //   isFailed: true,
-      // );
+      CustomSnackbar.snackbar(message: ex.type.name, isFailed: true);
       return ex;
     }
   }
-
-  // Future<dynamic> download({
-  //   required String path,
-  //   // required BuildContext context,
-  //   String? downloadPath,
-  // }) async {
-  //   await fetchCookieData();
-
-  //   try {
-  //     Response resp = await dio.download(path, downloadPath);
-
-  //     printSuccessDetails(resp: resp);
-  //     return resp.data;
-  //   } on DioException catch (ex) {
-  //     printFailedDetails(ex: ex);
-  //     CustomSnackbar.showSnackbar(
-  //       // context: context,
-  //       message: ex.type.name,
-  //       isFailed: true,
-  //     );
-  //     return ex;
-  //   }
-  // }
 
   void printSuccessDetails({required Response resp}) {
     log("!!!!!!!!!!!!!! Request Begin !!!!!!!!!!!!!!!!!!!!!");

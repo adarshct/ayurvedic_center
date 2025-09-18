@@ -1,4 +1,6 @@
 import 'package:ayurvedic_center/core/constants/routes.dart';
+import 'package:ayurvedic_center/core/utils/app_router.dart';
+import 'package:ayurvedic_center/features/home/presentation/pages/home_screen.dart';
 import 'package:ayurvedic_center/features/login/presentation/pages/login_screen.dart';
 import 'package:ayurvedic_center/features/splash/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorKey: AppRouter.navigatorKey,
       initialRoute: Routes.splash,
       theme: ThemeData(fontFamily: 'Poppins'),
       builder: (context, child) {
@@ -26,8 +29,9 @@ class MyApp extends StatelessWidget {
         );
       },
       routes: {
-        '/': (_) => const SplashScreen(),
-        '/login': (_) => const LoginScreen(),
+        Routes.splash: (_) => const SplashScreen(),
+        Routes.login: (_) => const LoginScreen(),
+        Routes.home: (_) => const HomeScreen(),
       },
     );
   }

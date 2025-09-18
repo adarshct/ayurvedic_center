@@ -1,4 +1,5 @@
 import 'package:ayurvedic_center/core/constants/routes.dart';
+import 'package:ayurvedic_center/core/utils/auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashProvider extends ChangeNotifier {
@@ -9,10 +10,13 @@ class SplashProvider extends ChangeNotifier {
 
   void _startTimer() async {
     await Future.delayed(const Duration(seconds: 3));
-    _navigateToLogin();
+    _navigate();
   }
 
-  void _navigateToLogin() {
-    Navigator.pushReplacementNamed(context, Routes.login);
+  void _navigate() {
+    Navigator.pushReplacementNamed(
+      context,
+      Auth.accessToken.isNotEmpty ? Routes.home : Routes.login,
+    );
   }
 }

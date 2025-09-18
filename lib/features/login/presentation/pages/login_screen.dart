@@ -20,24 +20,44 @@ class LoginScreen extends StatelessWidget {
           children: [
             LoginHeader(),
             Expanded(
-              child: ListView(
-                shrinkWrap: true,
-                padding: EdgeInsets.symmetric(
-                  horizontal: Device.horizontalPadding,
-                  vertical: 25,
-                ),
-                children: [
-                  Text(
-                    "Login Or Register To Book Your Appointments",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                  ),
-                  40.hBox,
-                  AppTextField(label: "Email", hint: "Enter your email"),
-                  35.hBox,
-                  AppTextField(label: "Password", hint: "Enter Password"),
-                  80.hBox,
-                  AppButton(onPressed: () {}, text: "Login"),
-                ],
+              child: Consumer<LoginProvider>(
+                builder: (context, provider, _) {
+                  return ListView(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Device.horizontalPadding,
+                      vertical: 25,
+                    ),
+                    children: [
+                      Text(
+                        "Login Or Register To Book Your Appointments",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      40.hBox,
+                      AppTextField(
+                        controller: provider.emailController,
+                        label: "Email",
+                        hint: "Enter your email",
+                      ),
+                      35.hBox,
+                      AppTextField(
+                        controller: provider.passwordController,
+                        label: "Password",
+                        hint: "Enter Password",
+                      ),
+                      80.hBox,
+                      AppButton(
+                        onPressed: () async {
+                          await provider.login();
+                        },
+                        text: "Login",
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
             DisclaimerText(),

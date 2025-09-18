@@ -1,3 +1,5 @@
+import 'package:ayurvedic_center/core/utils/local_storage.dart';
+
 class Auth {
-  static String accessToken = '';
+  static String get accessToken => LocalStorage.getData(key: 'token') ?? "";
 }
