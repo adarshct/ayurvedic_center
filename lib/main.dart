@@ -15,8 +15,15 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: Routes.splash,
+      theme: ThemeData(fontFamily: 'Poppins'),
       builder: (context, child) {
-        return SafeArea(bottom: true, top: false, child: child!);
+        return SafeArea(
+          bottom: true,
+          top: false,
+          left: false,
+          right: false,
+          child: child!,
+        );
       },
       routes: {
         '/': (_) => const SplashScreen(),

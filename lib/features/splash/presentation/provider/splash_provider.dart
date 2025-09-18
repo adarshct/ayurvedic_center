@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class SplashProvider extends ChangeNotifier {
   final BuildContext context;
   SplashProvider(this.context) {
-    print("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
     _startTimer();
   }
 
