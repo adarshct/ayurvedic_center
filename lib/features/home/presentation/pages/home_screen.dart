@@ -1,4 +1,4 @@
-import 'package:ayurvedic_center/core/constants/app_colors.dart';
+import 'package:ayurvedic_center/core/constants/routes.dart';
 import 'package:ayurvedic_center/core/utils/device.dart';
 import 'package:ayurvedic_center/core/utils/extentions.dart';
 import 'package:ayurvedic_center/core/widgets/app_button.dart';
@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               20.hBox,
-              CustomAppbar(),
+              const CustomAppbar(),
               25.hBox,
               search(),
               25.hBox,
@@ -32,11 +32,11 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Sort by :"),
+                    const Text("Sort by :"),
                     Container(
                       width: 180,
                       height: 35,
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black.withValues(alpha: 0.3),
@@ -44,18 +44,24 @@ class HomeScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: DropdownButton(
-                        icon: Icon(Icons.keyboard_arrow_down_rounded),
-                        underline: SizedBox(),
+                        icon: const Icon(Icons.keyboard_arrow_down_rounded),
+                        underline: const SizedBox(),
                         isExpanded: true,
                         value: "Date",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                           color: Colors.black,
                           fontFamily: 'Poppins',
                         ),
                         items: [
-                          DropdownMenuItem(value: "Date", child: Text("Date")),
-                          DropdownMenuItem(value: "Name", child: Text("Name")),
+                          const DropdownMenuItem(
+                            value: "Date",
+                            child: Text("Date"),
+                          ),
+                          const DropdownMenuItem(
+                            value: "Name",
+                            child: Text("Name"),
+                          ),
                         ],
                         onChanged: (value) {},
                       ),
@@ -69,12 +75,17 @@ class HomeScreen extends StatelessWidget {
                 thickness: 1.5,
                 height: 0,
               ),
-              PatientsList(),
+              const PatientsList(),
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: Device.horizontalPadding,
                 ),
-                child: AppButton(onPressed: () {}, text: "Register Now"),
+                child: AppButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(Routes.register);
+                  },
+                  text: "Register Now",
+                ),
               ),
               30.hBox,
             ],
@@ -93,10 +104,10 @@ class HomeScreen extends StatelessWidget {
             child: SizedBox(
               height: 42,
               child: TextField(
-                style: TextStyle(decorationThickness: 0),
+                style: const TextStyle(decorationThickness: 0),
                 decoration: InputDecoration(
                   isDense: true,
-                  contentPadding: EdgeInsets.only(bottom: 12),
+                  contentPadding: const EdgeInsets.only(bottom: 12),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
                       color: Colors.black.withValues(alpha: 0.3),

@@ -41,7 +41,7 @@ class AppButton extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               )
-            : SizedBox(
+            : const SizedBox(
                 width: 25,
                 height: 25,
                 child: CircularProgressIndicator(color: AppColors.appGreen),

@@ -26,14 +26,14 @@ class AppTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(" $label", style: TextStyle(fontSize: 16)),
+        Text(" $label", style: const TextStyle(fontSize: 16)),
         5.hBox,
         TextFormField(
           controller: controller,
-          style: TextStyle(decorationThickness: 0),
+          style: const TextStyle(decorationThickness: 0),
           decoration: InputDecoration(
             isDense: true,
-            contentPadding: EdgeInsets.all(13),
+            contentPadding: const EdgeInsets.all(13),
             enabledBorder: border(),
             focusedBorder: border(),
             filled: true,

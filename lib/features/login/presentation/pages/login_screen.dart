@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            LoginHeader(),
+            const LoginHeader(),
             Expanded(
               child: Consumer<LoginProvider>(
                 builder: (context, provider, _) {
@@ -29,7 +29,7 @@ class LoginScreen extends StatelessWidget {
                       vertical: 25,
                     ),
                     children: [
-                      Text(
+                      const Text(
                         "Login Or Register To Book Your Appointments",
                         style: TextStyle(
                           fontSize: 24,
@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
                 },
               ),
             ),
-            DisclaimerText(),
+            const DisclaimerText(),
             30.hBox,
           ],
         ),

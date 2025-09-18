@@ -18,7 +18,7 @@ class PatientsList extends HomeScreen {
       child: Consumer<HomeProvider>(
         builder: (context, provider, _) {
           if (provider.isLoading) {
-            return Center(
+            return const Center(
               child: SizedBox(
                 height: 30,
                 width: 30,
@@ -75,13 +75,13 @@ class PatientsList extends HomeScreen {
 
   Widget topPart(Patient patient, int index) {
     return Padding(
-      padding: EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 10),
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             "${index + 1}.",
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
           ),
           10.wBox,
           Expanded(
@@ -90,17 +90,23 @@ class PatientsList extends HomeScreen {
               children: [
                 Text(
                   patient.name!,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
                 ),
                 5.hBox,
                 Text(
                   patient.patientDetailsSet?[0].treatmentName ?? "",
-                  style: TextStyle(color: AppColors.appGreen, fontSize: 13),
+                  style: const TextStyle(
+                    color: AppColors.appGreen,
+                    fontSize: 13,
+                  ),
                 ),
                 12.hBox,
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.calendar_month,
                       size: 15,
                       color: AppColors.appRed,
@@ -117,7 +123,7 @@ class PatientsList extends HomeScreen {
                       ),
                     ),
                     15.wBox,
-                    Icon(
+                    const Icon(
                       Icons.people_outline,
                       size: 15,
                       color: AppColors.appRed,
@@ -146,7 +152,7 @@ class PatientsList extends HomeScreen {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {},
-      child: Padding(
+      child: const Padding(
         padding: EdgeInsets.only(left: 35, right: 15, top: 8, bottom: 10),
         child: Row(
           children: [

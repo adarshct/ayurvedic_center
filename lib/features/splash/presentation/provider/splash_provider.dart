@@ -1,6 +1,5 @@
 import 'package:ayurvedic_center/core/constants/routes.dart';
 import 'package:ayurvedic_center/core/utils/auth.dart';
-import 'package:ayurvedic_center/core/utils/local_storage.dart';
 import 'package:flutter/material.dart';
 
 class SplashProvider extends ChangeNotifier {
@@ -15,7 +14,6 @@ class SplashProvider extends ChangeNotifier {
   }
 
   void _navigate() {
-    print("TOKEEEEEEEEEEEN: ${LocalStorage.getData(key: 'access')}");
     Navigator.pushReplacementNamed(
       context,
       Auth.accessToken.isNotEmpty ? Routes.home : Routes.login,

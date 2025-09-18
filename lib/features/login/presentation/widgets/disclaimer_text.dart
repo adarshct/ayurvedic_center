@@ -36,10 +36,7 @@ class DisclaimerText extends StatelessWidget {
     return TextSpan(
       text: text,
       style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.w500),
-      recognizer: TapGestureRecognizer()
-        ..onTap = () {
-          print('$text clicked');
-        },
+      recognizer: TapGestureRecognizer()..onTap = () {},
     );
   }
 }
