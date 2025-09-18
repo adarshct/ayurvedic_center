@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Ayurveda',
       navigatorKey: AppRouter.navigatorKey,
       theme: ThemeData(fontFamily: 'Poppins'),
       builder: (context, child) {

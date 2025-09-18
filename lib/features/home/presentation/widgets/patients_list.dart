@@ -22,7 +22,7 @@ class PatientsList extends HomeScreen {
               child: SizedBox(
                 height: 30,
                 width: 30,
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: AppColors.appGreen),
               ),
             );
           }
@@ -36,6 +36,7 @@ class PatientsList extends HomeScreen {
             );
           }
           return RefreshIndicator(
+            color: AppColors.appGreen,
             onRefresh: () async {
               await provider.getPatientsList();
             },
