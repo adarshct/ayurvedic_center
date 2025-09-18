@@ -17,7 +17,7 @@ class LoginProvider extends ChangeNotifier {
     });
     dynamic resp = await LoginRepository.login(data);
 
-    if (resp is Map) {
+    if (resp is Map<String, dynamic>) {
       if (resp.containsKey('token')) {
         await LocalStorage.setData(key: 'token', value: resp['token']);
 

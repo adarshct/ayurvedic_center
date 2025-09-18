@@ -17,22 +17,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: AppRouter.navigatorKey,
-      initialRoute: Routes.splash,
       theme: ThemeData(fontFamily: 'Poppins'),
       builder: (context, child) {
-        return SafeArea(
-          bottom: true,
-          top: false,
-          left: false,
-          right: false,
-          child: child!,
-        );
+        return SafeArea(bottom: true, top: false, child: child!);
       },
       routes: {
-        Routes.splash: (_) => const SplashScreen(),
-        Routes.login: (_) => const LoginScreen(),
+        // Routes.splash: (_) => const SplashScreen(),
+        // Routes.login: (_) => const LoginScreen(),
         Routes.home: (_) => const HomeScreen(),
       },
+      initialRoute: Routes.home,
     );
   }
 }
