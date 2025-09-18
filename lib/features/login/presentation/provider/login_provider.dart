@@ -10,7 +10,12 @@ class LoginProvider extends ChangeNotifier {
   final emailController = TextEditingController(text: "test_user");
   final passwordController = TextEditingController(text: "12345678");
 
+  bool isLoading = false;
+
   Future<void> login() async {
+    isLoading = true;
+    notifyListeners();
+
     FormData data = FormData.fromMap({
       'username': emailController.text,
       'password': passwordController.text,
@@ -19,12 +24,16 @@ class LoginProvider extends ChangeNotifier {
 
     if (resp is Map<String, dynamic>) {
       if (resp.containsKey('token')) {
-        await LocalStorage.setData(key: 'token', value: resp['token']);
+        String token = resp['token'];
+        await LocalStorage.setData(key: 'access', value: token);
 
         Navigator.of(AppRouter.context!).pushReplacementNamed(Routes.home);
       } else {
         CustomSnackbar.errorSnackbar();
       }
     }
+
+    isLoading = false;
+    notifyListeners();
   }
 }

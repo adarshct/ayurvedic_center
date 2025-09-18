@@ -15,7 +15,7 @@ class SplashProvider extends ChangeNotifier {
   }
 
   void _navigate() {
-    print("TOKEEEEEEEEEEEN: ${LocalStorage.getData(key: 'token')}");
+    print("TOKEEEEEEEEEEEN: ${LocalStorage.getData(key: 'access')}");
     Navigator.pushReplacementNamed(
       context,
       Auth.accessToken.isNotEmpty ? Routes.home : Routes.login,

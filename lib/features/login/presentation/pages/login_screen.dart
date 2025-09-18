@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                         label: "Email",
                         hint: "Enter your email",
                       ),
-                      35.hBox,
+                      30.hBox,
                       AppTextField(
                         controller: provider.passwordController,
                         label: "Password",
@@ -50,6 +50,7 @@ class LoginScreen extends StatelessWidget {
                       ),
                       80.hBox,
                       AppButton(
+                        isLoading: provider.isLoading,
                         onPressed: () async {
                           await provider.login();
                         },

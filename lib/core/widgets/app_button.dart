@@ -9,6 +9,7 @@ class AppButton extends StatelessWidget {
     this.height,
     this.textSize,
     required this.text,
+    this.isLoading = false,
   });
 
   final void Function()? onPressed;
@@ -16,6 +17,7 @@ class AppButton extends StatelessWidget {
   final double? height;
   final String text;
   final double? textSize;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -23,21 +25,27 @@ class AppButton extends StatelessWidget {
       height: height ?? 50,
       width: width ?? double.infinity,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: !isLoading ? onPressed : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.appGreen,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.52),
           ),
         ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: textSize ?? 17,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        child: !isLoading
+            ? Text(
+                text,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: textSize ?? 17,
+                  fontWeight: FontWeight.w600,
+                ),
+              )
+            : SizedBox(
+                width: 25,
+                height: 25,
+                child: CircularProgressIndicator(color: AppColors.appGreen),
+              ),
       ),
     );
   }

@@ -3,76 +3,82 @@ import 'package:ayurvedic_center/core/utils/device.dart';
 import 'package:ayurvedic_center/core/utils/extentions.dart';
 import 'package:ayurvedic_center/core/widgets/app_button.dart';
 import 'package:ayurvedic_center/core/widgets/custom_appbar.dart';
+import 'package:ayurvedic_center/features/home/presentation/provider/home_provider.dart';
 import 'package:ayurvedic_center/features/home/presentation/widgets/patients_list.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            20.hBox,
-            CustomAppbar(),
-            25.hBox,
-            search(),
-            25.hBox,
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: Device.horizontalPadding,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Sort by :"),
-                  Container(
-                    width: 180,
-                    height: 35,
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black.withValues(alpha: 0.3),
+    return ChangeNotifierProvider(
+      lazy: false,
+      create: (context) => HomeProvider(),
+      child: Scaffold(
+        body: SafeArea(
+          child: Column(
+            children: [
+              20.hBox,
+              CustomAppbar(),
+              25.hBox,
+              search(),
+              25.hBox,
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Device.horizontalPadding,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Sort by :"),
+                    Container(
+                      width: 180,
+                      height: 35,
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.black.withValues(alpha: 0.3),
+                        ),
+                        borderRadius: BorderRadius.circular(30),
                       ),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: DropdownButton(
-                      icon: Icon(Icons.keyboard_arrow_down_rounded),
-                      underline: SizedBox(),
-                      isExpanded: true,
-                      value: "Date",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black,
-                        fontFamily: 'Poppins',
+                      child: DropdownButton(
+                        icon: Icon(Icons.keyboard_arrow_down_rounded),
+                        underline: SizedBox(),
+                        isExpanded: true,
+                        value: "Date",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                          fontFamily: 'Poppins',
+                        ),
+                        items: [
+                          DropdownMenuItem(value: "Date", child: Text("Date")),
+                          DropdownMenuItem(value: "Name", child: Text("Name")),
+                        ],
+                        onChanged: (value) {},
                       ),
-                      items: [
-                        DropdownMenuItem(value: "Date", child: Text("Date")),
-                        DropdownMenuItem(value: "Name", child: Text("Name")),
-                      ],
-                      onChanged: (value) {},
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            15.hBox,
-            Divider(
-              color: Colors.black.withValues(alpha: 0.2),
-              thickness: 1.5,
-              height: 0,
-            ),
-            PatientsList(),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: Device.horizontalPadding,
+              15.hBox,
+              Divider(
+                color: Colors.black.withValues(alpha: 0.2),
+                thickness: 1.5,
+                height: 0,
               ),
-              child: AppButton(onPressed: () {}, text: "Register Now"),
-            ),
-            30.hBox,
-          ],
+              PatientsList(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: Device.horizontalPadding,
+                ),
+                child: AppButton(onPressed: () {}, text: "Register Now"),
+              ),
+              30.hBox,
+            ],
+          ),
         ),
       ),
     );

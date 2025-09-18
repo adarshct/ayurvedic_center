@@ -4,8 +4,13 @@ import 'package:ayurvedic_center/features/home/presentation/pages/home_screen.da
 import 'package:ayurvedic_center/features/login/presentation/pages/login_screen.dart';
 import 'package:ayurvedic_center/features/splash/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await GetStorage.init();
+
   runApp(const MyApp());
 }
 
@@ -22,11 +27,11 @@ class MyApp extends StatelessWidget {
         return SafeArea(bottom: true, top: false, child: child!);
       },
       routes: {
-        // Routes.splash: (_) => const SplashScreen(),
-        // Routes.login: (_) => const LoginScreen(),
+        Routes.splash: (_) => const SplashScreen(),
+        Routes.login: (_) => const LoginScreen(),
         Routes.home: (_) => const HomeScreen(),
       },
-      initialRoute: Routes.home,
+      initialRoute: Routes.splash,
     );
   }
 }

@@ -15,8 +15,8 @@ class MyDio {
         baseUrl: ApiPaths.baseUrl,
         receiveDataWhenStatusError: true,
         responseType: ResponseType.plain,
-        connectTimeout: const Duration(seconds: 60),
-        receiveTimeout: const Duration(seconds: 30),
+        connectTimeout: const Duration(seconds: 120),
+        receiveTimeout: const Duration(seconds: 120),
         headers: {
           Headers.contentTypeHeader: Headers.jsonContentType,
           if (Auth.accessToken.isNotEmpty)

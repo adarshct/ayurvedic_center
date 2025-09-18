@@ -1,29 +1,63 @@
 import 'package:ayurvedic_center/core/constants/app_colors.dart';
+import 'package:ayurvedic_center/core/constants/assets_helper.dart';
 import 'package:ayurvedic_center/core/utils/device.dart';
 import 'package:ayurvedic_center/core/utils/extentions.dart';
+import 'package:ayurvedic_center/features/home/data/models/patient_model.dart';
+import 'package:ayurvedic_center/features/home/presentation/pages/home_screen.dart';
+import 'package:ayurvedic_center/features/home/presentation/provider/home_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
-class PatientsList extends StatelessWidget {
+class PatientsList extends HomeScreen {
   const PatientsList({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.separated(
-        padding: EdgeInsets.symmetric(
-          horizontal: Device.horizontalPadding,
-          vertical: 12,
-        ),
-        itemBuilder: (context, index) {
-          return patientTile();
+      child: Consumer<HomeProvider>(
+        builder: (context, provider, _) {
+          if (provider.isLoading) {
+            return Center(
+              child: SizedBox(
+                height: 30,
+                width: 30,
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+
+          if (provider.patientList.isEmpty) {
+            return Center(
+              child: Image.asset(
+                AssetsHelper.empty,
+                width: Device.width(context) * 0.2,
+              ),
+            );
+          }
+          return RefreshIndicator(
+            onRefresh: () async {
+              await provider.getPatientsList();
+            },
+            child: ListView.separated(
+              padding: EdgeInsets.symmetric(
+                horizontal: Device.horizontalPadding,
+                vertical: 12,
+              ),
+              itemBuilder: (context, index) {
+                Patient patient = provider.patientList[index];
+                return patientTile(patient, index);
+              },
+              separatorBuilder: (context, index) => 15.hBox,
+              itemCount: provider.patientList.length,
+            ),
+          );
         },
-        separatorBuilder: (context, index) => 15.hBox,
-        itemCount: 10,
       ),
     );
   }
 
-  Widget patientTile() {
+  Widget patientTile(Patient patient, int index) {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.fieldColor,
@@ -31,7 +65,7 @@ class PatientsList extends StatelessWidget {
       ),
       child: Column(
         children: [
-          topPart(),
+          topPart(patient, index),
           Divider(color: Colors.black.withValues(alpha: 0.2), height: 5),
           bottomPart(),
         ],
@@ -39,14 +73,14 @@ class PatientsList extends StatelessWidget {
     );
   }
 
-  Widget topPart() {
+  Widget topPart(Patient patient, int index) {
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15, top: 15, bottom: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "1.",
+            "${index + 1}.",
             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
           ),
           10.wBox,
@@ -55,12 +89,12 @@ class PatientsList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Vikram Singh",
+                  patient.name!,
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
                 ),
                 5.hBox,
                 Text(
-                  "Couple Combo package",
+                  patient.patientDetailsSet?[0].treatmentName ?? "",
                   style: TextStyle(color: AppColors.appGreen, fontSize: 13),
                 ),
                 12.hBox,
@@ -73,7 +107,9 @@ class PatientsList extends StatelessWidget {
                     ),
                     3.wBox,
                     Text(
-                      "02/03/2025",
+                      DateFormat(
+                        'dd/MM/yyyy',
+                      ).format(patient.dateNdTime ?? patient.createdAt!),
                       style: TextStyle(
                         color: Colors.black.withValues(alpha: 0.5),
                         fontSize: 13,
